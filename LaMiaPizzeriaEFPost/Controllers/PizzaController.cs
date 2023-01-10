@@ -24,18 +24,19 @@ namespace LaMiaPizzeriaEFPost.Controllers
         {
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                bool FunzioneID(Pizza pizzaDB)
+                //LINQ Method synthax
+                Pizza pizzaScelta = db.Pizza
+                    .Where(pizza => pizza.Id == idScelto)
+                    .FirstOrDefault();
+
+                if (pizzaScelta != null)
                 {
-                    bool trova = false;
-                    if (pizzaDB.Id == idScelto)
-                    {
-                        trova = true;
-                    }
-                    return trova;
+                    return View(pizzaScelta);
                 }
-                return NotFound("Questa pizza non esiste");
             }
+            return NotFound("Questa pizza non esiste");
         }
+
 
         [HttpGet]
         public IActionResult Aggiungi()
@@ -48,13 +49,18 @@ namespace LaMiaPizzeriaEFPost.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Aggiungi(Pizza NuovaPizza)
         {
-                using (PizzeriaContext db = new PizzeriaContext())
-                {
-                    db.Pizza.Add(NuovaPizza);
-                    db.SaveChanges();
-                }
+            if (!ModelState.IsValid)
+            {
+                return View("Aggiungi", NuovaPizza);
+            }
 
-                return RedirectToAction("Index");
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                db.Pizza.Add(NuovaPizza);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
 
     }
