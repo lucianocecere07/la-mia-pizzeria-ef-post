@@ -1,4 +1,5 @@
-﻿using LaMiaPizzeriaEFPost.Models;
+﻿using LaMiaPizzeriaEFPost.DataBase;
+using LaMiaPizzeriaEFPost.Models;
 using LaMiaPizzeriaEFPost.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
@@ -8,24 +9,32 @@ namespace LaMiaPizzeriaEFPost.Controllers
 {
     public class PizzaController : Controller
     {
+        
         public IActionResult Index()
         {
-            List<Pizza> listaPizza = PizzeLista.Pizze();
-            return View("Index", listaPizza);
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                List<Pizza> listaPizza = db.Pizza.ToList<Pizza>();
+
+                return View("Index", listaPizza);
+            }
         }
 
         public IActionResult Dettagli(int idScelto)
         {
-            List<Pizza> listaPizza = PizzeLista.Pizze();
-            foreach (Pizza pizza in listaPizza)
+            using (PizzeriaContext db = new PizzeriaContext())
             {
-                if (pizza.Id == idScelto)
+                bool FunzioneID(Pizza pizzaDB)
                 {
-                    return View(pizza);
+                    bool trova = false;
+                    if (pizzaDB.Id == idScelto)
+                    {
+                        trova = true;
+                    }
+                    return trova;
                 }
+                return NotFound("Questa pizza non esiste");
             }
-
-            return NotFound("Questa pizza non esiste");
         }
 
         [HttpGet]
@@ -34,12 +43,18 @@ namespace LaMiaPizzeriaEFPost.Controllers
             return View();
         }
 
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Aggiungi(Pizza NuovaPizza)
         {
+                using (PizzeriaContext db = new PizzeriaContext())
+                {
+                    db.Pizza.Add(NuovaPizza);
+                    db.SaveChanges();
+                }
 
+                return RedirectToAction("Index");
         }
 
     }

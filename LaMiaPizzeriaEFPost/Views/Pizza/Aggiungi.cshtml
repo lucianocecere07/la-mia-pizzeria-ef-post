@@ -6,26 +6,29 @@
 
 @model Pizza
 
-<form>
-    <div class="mb-3">
-        <label class="form-label">Nome</label>
-        <input type="text" class="form-control" asp-for="Name">
-    </div>
+<div class="container">
+    <h2><u>Compila il form per aggiungere la pizza al menù</u></h2>
+    <form>
+        <div class="mb-3">
+            <label class="form-label fw-bolder">Nome</label>
+            <input type="text" class="form-control" asp-for="Name">
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Descrizione</label>
-        <input type="text" class="form-control" asp-for="Description">
-    </div>
+        <div class="mb-3">
+            <label class="form-label fw-bolder">Descrizione</label>
+            <input type="text" class="form-control" asp-for="Description">
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Percorso dell'immagine</label>
-        <input type="text" class="form-control" asp-for="Image">
-    </div>
+        <div class="mb-3">
+            <label class="form-label fw-bolder">Percorso dell'immagine</label>
+            <input type="text" class="form-control" asp-for="Image">
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Prezzo</label>
-        <input type="text" class="form-control" asp-for="Price"> €
-    </div>
+        <div class="mb-3">
+            <label class="form-label fw-bolder">Prezzo (€)</label>
+            <input type="text" class="form-control" asp-for="Price">
+        </div>
 
-    <button type="submit" class="btn btn-link">Aggiungi la nuova pizza</button>
-</form>
+        <button type="submit" class="btn btn-link btn-lg" value="salva">Aggiungi la pizza</button>
+    </form>
+</div>
