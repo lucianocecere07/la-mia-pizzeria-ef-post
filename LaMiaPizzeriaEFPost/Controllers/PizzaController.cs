@@ -27,5 +27,20 @@ namespace LaMiaPizzeriaEFPost.Controllers
 
             return NotFound("Questa pizza non esiste");
         }
+
+        [HttpGet]
+        public IActionResult Aggiungi()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Aggiungi(Pizza NuovaPizza)
+        {
+
+        }
+
     }
 }

@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Pizza
+
+<form>
+    <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control" asp-for="Name">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Descrizione</label>
+        <input type="text" class="form-control" asp-for="Description">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Percorso dell'immagine</label>
+        <input type="text" class="form-control" asp-for="Image">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Prezzo</label>
+        <input type="text" class="form-control" asp-for="Price"> €
+    </div>
+
+    <button type="submit" class="btn btn-link">Aggiungi la nuova pizza</button>
+</form>
