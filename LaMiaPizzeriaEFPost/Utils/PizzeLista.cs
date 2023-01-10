@@ -4,6 +4,7 @@ namespace LaMiaPizzeriaEFPost.Utils
 {
     public static class PizzeLista
     {
+        /*
         private static List<Pizza> pizze;
 
         public static List<Pizza> Pizze()
@@ -31,6 +32,6 @@ namespace LaMiaPizzeriaEFPost.Utils
 
             return pizze;
         }
-        
+        */
     }
 }

@@ -24,7 +24,6 @@ namespace LaMiaPizzeriaEFPost.Controllers
         {
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                //LINQ Method synthax
                 Pizza pizzaScelta = db.Pizza
                     .Where(pizza => pizza.Id == idScelto)
                     .FirstOrDefault();
