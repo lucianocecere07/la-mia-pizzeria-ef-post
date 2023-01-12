@@ -108,7 +108,31 @@ namespace LaMiaPizzeriaEFPost.Controllers
                     return RedirectToAction("Index");
                 }
 
-                return NotFound("Il post che volevi modificare non è stato trovato!");
+                return NotFound("Questa pizza non è stata trovata");
+            }
+        }
+
+
+        //ELIMINARE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Elimina(int id)
+        {
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                Pizza pizzaScelta = db.Pizza
+                    .Where(pizza => pizza.Id == id)
+                    .FirstOrDefault();
+
+                if (pizzaScelta != null)
+                {
+                    db.Pizza.Remove(pizzaScelta);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                return NotFound("Questa pizza non è stata trovata");
+
             }
         }
 
