@@ -19,6 +19,7 @@ namespace LaMiaPizzeriaEFPost.Models
 
         [Column(TypeName = "varchar(500)")]
         [StringLength(500, ErrorMessage = "Il percorso dell'immagine non può essere più di 500 caratteri")]
+        [ImmagineValidazione]
         public string Image { get; set; }
 
         [Column(TypeName = "decimal(6,2)")]
