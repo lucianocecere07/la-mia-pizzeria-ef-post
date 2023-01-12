@@ -41,6 +41,7 @@
                             <td><img src="@pizza.Image" class="img-fluid" alt="@pizza.Name"></td>
                             <td>@pizza.Price.ToString("F") €</td>
                             <td><a class="btn btn-link" href="@Url.Action("Dettagli", "Pizza", new { idScelto = pizza.Id } )" role="button">Dettagli</a></td>
+                            <td><a class="btn btn-link" href="@Url.Action("Modifica", "Pizza", new { idScelto = pizza.Id } )" role="button">Modifica</a></td>
                         </tr>
                     }
                 </tbody>

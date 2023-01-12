@@ -7,9 +7,14 @@
 @model Pizza
 
 <div class="container">
-    <h2><u>Compila il form per aggiungere la pizza al menù</u></h2>
-    <form asp-controller="Pizza" asp-action="Aggiungi">
+    <h2><u>Compila il form per modificare la pizza selezionata</u></h2>
+    <form asp-controller="Pizza" asp-action="Modifica">
         @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <label class="form-label fw-bolder">Id</label>
+            <input asp-for="Id" type="text" class="form-control" readonly>
+        </div>
+
         <div class="mb-3">
             <label class="form-label fw-bolder">Nome</label>
             <input type="text" class="form-control" asp-for="Name">
@@ -34,6 +39,6 @@
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn btn-link btn-lg" value="salva">Aggiungi la pizza</button>
+        <button type="submit" class="btn btn-link btn-lg" value="salva">Salva la modifica</button>
     </form>
 </div>

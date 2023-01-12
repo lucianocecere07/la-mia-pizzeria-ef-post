@@ -37,13 +37,13 @@ namespace LaMiaPizzeriaEFPost.Controllers
         }
 
 
+        //AGGIUNGI
         [HttpGet]
         public IActionResult Aggiungi()
         {
             return View();
         }
 
-        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Aggiungi(Pizza NuovaPizza)
@@ -60,6 +60,56 @@ namespace LaMiaPizzeriaEFPost.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+
+        //MODIFICA
+        [HttpGet]
+        public IActionResult Modifica(int idScelto)
+        {
+            using(PizzeriaContext db = new PizzeriaContext())
+            {
+                Pizza pizzaScelta = db.Pizza
+                      .Where(pizza => pizza.Id == idScelto)
+                      .FirstOrDefault();
+
+                if (pizzaScelta != null)
+                {
+                    return View(pizzaScelta);
+                }
+            }
+            return NotFound("Questa pizza non è stata trovata");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Modifica(Pizza NuovaPizza)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Aggiungi", NuovaPizza);
+            }
+
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                Pizza pizzaScelta = db.Pizza
+                      .Where(pizza => pizza.Id == NuovaPizza.Id)
+                      .FirstOrDefault();
+
+                if (pizzaScelta != null)
+                {
+                    pizzaScelta.Name = NuovaPizza.Name;
+                    pizzaScelta.Description = NuovaPizza.Description;
+                    pizzaScelta.Image = NuovaPizza.Image;
+                    pizzaScelta.Price = NuovaPizza.Price;
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+
+                return NotFound("Il post che volevi modificare non è stato trovato!");
+            }
         }
 
     }
