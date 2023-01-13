@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LaMiaPizzeriaEFPost.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LaMiaPizzeriaEFPost.Models
@@ -15,11 +16,13 @@ namespace LaMiaPizzeriaEFPost.Models
 
         [Column(TypeName = "varchar(1000)")]
         [StringLength(1000, ErrorMessage = "La descrizione non può essere più di 1000 caratteri")]
+        [Required(ErrorMessage = "Il campo della descrizione è obbligatorio")]
         public string Description { get; set; }
 
         [Column(TypeName = "varchar(500)")]
         [StringLength(500, ErrorMessage = "Il percorso dell'immagine non può essere più di 500 caratteri")]
-        [ImmagineValidazione]
+        [ImmagineValidationAttribute]
+        [Required(ErrorMessage = "Il campo del percorso dell'immagine è obbligatorio")]
         public string Image { get; set; }
 
         [Column(TypeName = "decimal(6,2)")]
